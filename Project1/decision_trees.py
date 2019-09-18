@@ -1,5 +1,6 @@
 import numpy as np 
 import math 
+import operator
 
 # BEGIN inputing first set of data 
 X_Training1 = np.array( [ [0,1],
@@ -131,6 +132,7 @@ Y_real = np.array( [ [1],
                      [0] ] )
 # END Data for generating the decision tree (last part of the project)
 
+"""
 def DT_train_binary(X,Y,max_depth):
     currentDepth = 0
     if max_depth < 0 :
@@ -138,6 +140,7 @@ def DT_train_binary(X,Y,max_depth):
     featuresList = []
     decisionTree = findBestTree(X,Y,max_depth,featuresList,currentDepth)
     return decisionTree
+"""
 '''
 def DT_test_binary(X,Y,DT):
 
@@ -149,7 +152,7 @@ def DT_test_real(X,Y,DT):
 
 def DT_train_real_best(X_train,Y_train,X_val,Y_val):
 '''
-
+"""
 def entropy(Set):
     # count the number of yes or true
     Positive = np.sum(Set)
@@ -175,11 +178,63 @@ def informationGain(left, right, label):
     infoGain = entireTrainingEntropy - (((leftSplitSize/entireSize)*(leftEntropy) ) + ((rightSplitSize/entireSize)*(rightEntropy)))
    
     return infoGain
+"""
 
+def splitData(X, direction, value):
+    results = []
+    for i in X:
+        if i[direction] == value:
+            split = i[:direction].tolist()
+            split.extend(i[direction+1:])
+            results.append(split)
+    return results
+
+def Entropy(dataSet):
+	numEntires = len(dataSet)						
+	labelCounts = {}								
+	for featVec in dataSet:							
+		currentLabel = featVec[-1]
+		if currentLabel not in labelCounts.keys():	
+			labelCounts[currentLabel] = 0
+		labelCounts[currentLabel] += 1				
+	entropy = 0.0								
+	for key in labelCounts:							
+		prob = float(labelCounts[key]) / numEntires	
+		entropy -= prob * math.log(prob, 2)		
+	return entropy	
+
+def BestSplit(X):
+	numFeatures = len(X[0]) - 1				
+	baseEntropy = Entropy(X) 			
+	bestInfoGain = 0.0  								
+	bestFeature = -1								
+	for i in range(numFeatures): 						
+		featList = [example[i] for example in X]
+		uniqueVals = set(featList)     				
+		newEntropy = 0.0  								
+		for value in uniqueVals: 						
+			subDataSet = splitData(X, i, value) 		
+			prob = len(subDataSet) / float(len(X))   		
+			newEntropy += prob * Entropy(subDataSet) 	
+		infoGain = baseEntropy - newEntropy 						
+		if (infoGain > bestInfoGain): 							
+			bestInfoGain = infoGain 							
+			bestFeature = i 									
+	return bestFeature 			
+
+def numOccurrances(classList):
+	classCount = {}
+	for vote in classList:										
+		if vote not in classCount.keys():classCount[vote] = 0	
+		classCount[vote] += 1
+	sortedClassCount = sorted(classCount.items(), key = operator.itemgetter(1), reverse = True)		
+	return sortedClassCount[0][0]							
+		
 # def findBestTree(X,Y,max_depth,featuresList,currentDepth):
 
 def main():
-    print ("Let's get it")
+	print(Entropy(X_Training1))
+	print(BestSplit(X_Training2)) # returns index value of feature with largest IG
 if __name__ == "__main__":
-    main()
+	main()
 
