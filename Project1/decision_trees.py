@@ -132,7 +132,13 @@ Y_real = np.array( [ [1],
 # END Data for generating the decision tree (last part of the project)
 
 def DT_train_binary(X,Y,max_depth):
-
+    currentDepth = 0
+    if max_depth < 0 :
+        max_depth = min (len(X[0]), len(X) - 1)
+    featuresList = []
+    decisionTree = findBestTree(X,Y,max_depth,featuresList,currentDepth)
+    return decisionTree
+'''
 def DT_test_binary(X,Y,DT):
 
 def DT_train_binary_best(X_train, Y_train, X_val, Y_val):
@@ -142,9 +148,38 @@ def DT_train_real(X,Y,max_depth):
 def DT_test_real(X,Y,DT):
 
 def DT_train_real_best(X_train,Y_train,X_val,Y_val):
+'''
+
+def entropy(Set):
+    # count the number of yes or true
+    Positive = np.sum(Set)
+    # get the size of the training data 
+    Size = np.size(Set)
+    # number of negatives or no
+    Negative = Size - Positive
+    # calculate entropy of the set 
+    Entropy = -(Negative/Size) * math.log2(Negative/Size) - (Positive/Size) * math.log2(Positive/Size)
+    return Entropy
+
+def informationGain(left, right, label):
+    # find the entropy of the whole set 
+    entireTrainingEntropy = entropy(label)
+    entireSize = np.sign(label)
+    # find the entropy of NO
+    leftEntropy = entropy(left)
+    leftSplitSize = np.size(left)
+    #find the Entropy of YES
+    rightEntropy = entropy(right)
+    rightSplitSize = np.size(right)
+    # find the information gain of that split
+    infoGain = entireTrainingEntropy - (((leftSplitSize/entireSize)*(leftEntropy) ) + ((rightSplitSize/entireSize)*(rightEntropy)))
+   
+    return infoGain
+
+# def findBestTree(X,Y,max_depth,featuresList,currentDepth):
 
 def main():
-
+    print ("Let's get it")
 if __name__ == "__main__":
     main()
 
