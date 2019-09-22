@@ -131,95 +131,47 @@ Y_real = np.array( [    [1],
 						[0] ] )
 # END Data for generating the decision tree (last part of the project)
 
-"""
-def DT_train_binary(X,Y,max_depth):
-currentDepth = 0
-if max_depth < 0 :
-	max_depth = min (len(X[0]), len(X) - 1)
-featuresList = []
-decisionTree = findBestTree(X,Y,max_depth,featuresList,currentDepth)
-return decisionTree
-"""
-'''
-def DT_test_binary(X,Y,DT):
+def mylog2(side):
+	if not side:
+		return 0
+	return -side * math.log2(side)
 
-def DT_train_binary_best(X_train, Y_train, X_val, Y_val):
-
-def DT_train_real(X,Y,max_depth):
-
-def DT_test_real(X,Y,DT):
-
-def DT_train_real_best(X_train,Y_train,X_val,Y_val):
-'''
+def Set_Prob(Set, Label):
+	return (np.count_nonzero(Set == Label)) / len(Set) if (len(Set)) else 0
 
 def entropy(Set):
-	#print(Set)
-	# count the number of yes or true
-	Positive = np.sum(Set)
-	#print(Positive)
-	# get the size of the training data 
-	Size = np.size(Set)
-	# number of negatives or no
-	Negative = Size - Positive
-	# calculate entropy of the set 
-	Entropy = -(Negative/Size) * math.log2(Negative/Size) - (Positive/Size) * math.log2(Positive/Size)
-	return Entropy
+	return mylog2(Set_Prob(Set, 0)) + mylog2(Set_Prob(Set, 1))
 
-def SplitData(XSet, YSet ):
-	features = []
-	NoIndex = []
-	YesIndex = []
-	for i in range(XSet[0].size):
-		# split into features
-		features = X_Training1[:,i]
-		# get the index number of NO and YES
-		NoIndex = (np.where(features == 0)[0])
-		YesIndex = (np.where(features == 1)[0])
-		# Size of NO
-		SizeOfNo = len(NoIndex)
-		# Size of YES 
-		SizeOfYes = len(YesIndex)
+def informationGain(Xset, label, i):
+	return entropy(label) - (Set_Prob(Xset[:,i], 0) * entropy(label[Xset[:,i] == 0]) + Set_Prob(Xset[:,i], 1) * entropy(label[Xset[:,i] == 1]))
 
-	# TODO find a way to pass in all the info u just gained from the features, 
-	"""
-	so we just found how many (and their index number) is 0 and 1
-								feature 1
-					0,1,3		/	  \     2,4
-							   /       \     
-							  NO        YES
-	"""
-	"""
-	Now we need to find out the the new array containing  0,1,3 of Label (Y_training)
-															|1|
-															|0|
-															|0|
+def SplitData(XSet, YSet):
+	Position = 0
+	BetterInfoGain = 0
+	for i in range (np.size(XSet,1)):
+		if informationGain(XSet, YSet, i) > BetterInfoGain:
+			Position = i
+			BetterInfoGain = informationGain(XSet, YSet, i)
+	return Position 
 
-		LEFT			H(feature 1 == NO) = -2/3log2(2/3) - 1/3log2(2/3)														
-	and then pass it as left and find the new array containing 2,4 of label (Ytraining)
-															|0|
-															|1|
-		RIGHT			H(feature 1 == Yes) = -1/2log2(1/2) - 1/2log2(1/2)	
-															
+def DT_train_binary(X,Y,max_depth):
+	if (max_depth == 0):
+		if ( X.size == 0):
+			return 0 if Set_Prob(Y, 0) > Set_Prob(Y, 1) else 1
+	else:
+		Left = X[X[:,SplitData(X, Y)] == 0]
+		LabelonLeft = Y[X[:,SplitData(X, Y)] == 0]
+		Right = X[X[:,SplitData(X, Y)] == 1]
+		LabelonRight = Y[X[:,SplitData(X, Y)] == 1]
+		Left = np.delete(Left, SplitData(X, Y), 1)
+		Right = np.delete(Right, SplitData(X, Y), 1)
+		return [SplitData(X, Y),ChildTree(LabelonLeft, 0, Left, max_depth-1), ChildTree(LabelonRight, 0, Right, max_depth-1)]
 
-	"""
-def informationGain(left, right, label):
-	# find the entropy of the whole set 
-	entireTrainingEntropy = entropy(label)
-	entireSize = np.sign(label)
-	# find the entropy of NO
-	leftEntropy = entropy(left)
-	leftSplitSize = np.size(left)
-	#find the Entropy of YES
-	rightEntropy = entropy(right)
-	rightSplitSize = np.size(right)
-	# find the information gain of that split
-	infoGain = entireTrainingEntropy - (((leftSplitSize/entireSize)*(leftEntropy) ) + ((rightSplitSize/entireSize)*(rightEntropy)))
+def ChildTree(Set, label, Side, max_depth):
+	if (entropy(Set) == label):
+		Child = Set[0]
+	else:
+		Child = DT_train_binary(Side, Set, max_depth - 1)
+	return Child
 
-	return infoGain
-
-def main():
-	SplitData(X_Training1, Y_Training1)
-
-if __name__ == "__main__":
-	main()
 
