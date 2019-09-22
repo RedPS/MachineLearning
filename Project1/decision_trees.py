@@ -174,4 +174,29 @@ def ChildTree(Set, label, Side, max_depth):
 		Child = DT_train_binary(Side, Set, max_depth - 1)
 	return Child
 
+def DT_test_binary(X,Y,DT):
+	Prediction = []
+	for sample in X:
+		DecisionTree = DT
+		if sample[DecisionTree[0]] == 0:
+			DecisionTree = DecisionTree[1]
+		else:
+			DecisionTree = DecisionTree[2]
+		Prediction.append(DecisionTree)
+	correct = 0
+	for i in range(len(Y)):
+		if Prediction[i] == Y[i]:
+			correct = correct + 1
+	return correct/len(Y)
+
+
+def main():
+	max_depth = 2
+	DT = DT_train_binary (X_Training1,Y_Training1, max_depth)
+	testacc = DT_test_binary(X_Training1,Y_Training1,DT)
+	print(testacc)
+
+
+if __name__ == "__main__":
+	main()
 
