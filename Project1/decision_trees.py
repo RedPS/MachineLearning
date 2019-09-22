@@ -189,6 +189,19 @@ def DT_test_binary(X,Y,DT):
 			correct = correct + 1
 	return correct/len(Y)
 
+def DT_train_binary_best(X_train, Y_train, X_val, Y_val):
+	CurrentDepth = 0
+	BestDecisionTree = DT_train_binary(X_train,Y_train, CurrentDepth)
+	BestAccuracy = 0
+	CurrentAccuracy = -1
+	while BestAccuracy > CurrentAccuracy:
+		CurrentDepth = CurrentDepth + 1
+		CurrentDecisionTree = BestDecisionTree
+		BestDecisionTree = DT_train_binary(X_train,Y_train, CurrentDepth)
+		CurrentAccuracy = BestAccuracy
+		BestAccuracy = DT_test_binary(X_val,Y_val, BestDecisionTree)
+	return CurrentDecisionTree
+
 
 def main():
 	max_depth = 2
