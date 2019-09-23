@@ -29,7 +29,7 @@ Y_Testing2 = np.array( [ [1], [1], [0], [0], [1], [0], [1], [1], [1] ] )
 
 # BEGIN Data for generating the decision tree (last part of the project)
 X_real = np.array([	[4.8, 3.4, 1.9, 0.2], 
-				   	[5.0, 3.0, 1.6, 1.2], 
+					[5.0, 3.0, 1.6, 1.2], 
 				   	[5.0, 3.4, 1.6, 0.2],
 				   	[5.2, 3.5, 1.5, 0.2], 
 				   	[5.2, 3.4, 1.4, 0.2], 
