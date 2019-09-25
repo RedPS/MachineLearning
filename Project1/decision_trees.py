@@ -1,6 +1,6 @@
 import numpy as np 
+import operator 
 import math 
-
 # BEGIN inputing first set of data 
 X_Training1 = np.array( [ [0,1], [0,0], [1,0], [0,0], [1,1] ] )
 Y_Training1 = np.array( [ [1], [0], [0], [0], [1] ] )
@@ -49,16 +49,16 @@ Y_real = np.array( [ [1], [1], [1], [1], [1], [1], [1], [1],[0], [0], [0], [0], 
 # END Data for generating the decision tree (last part of the project)
 
 def mylog2(side):
-	return 0 if not side else -side * math.log2(side)
+	return 0 if (side==0) else -side * math.log2(side)
 
 def Proportion(Set, Label):
-	return (np.count_nonzero(Set == Label)) / len(Set) if (len(Set)) else 0
+	return 0 if ((len(Set)) == 0) else (np.count_nonzero(Set == Label)) / len(Set)
 
 def entropy(Set):
 	return mylog2(Proportion(Set, 0)) + mylog2(Proportion(Set, 1))
 
 def informationGain(Xset, label, i):
-	return entropy(label) - (Proportion(Xset[:,i], 0) * entropy(label[Xset[:,i] == 0]) + Proportion(Xset[:,i], 1) * entropy(label[Xset[:,i] == 1]))
+	return entropy(label) - (Proportion(Xset[:,i], 0) *  entropy(label[Xset[:,i] == 0]) + Proportion(Xset[:,i], 1) * entropy(label[Xset[:,i] == 1]) )
 
 def SplitData(XSet, YSet):
 	Position = 0
@@ -79,27 +79,39 @@ def ChildTree(Set, label, Side, max_depth):
 		Child = DT_train_binary(Side, Set, max_depth - 1)
 	return Child
 
-def DT_train_binary(X,Y,max_depth):
-	if (max_depth == 0) and ( X.size == 0):
-			return 0 if Proportion(Y, 0) > Proportion(Y, 1) else 1
-	else:
-		Left = X[X[:,SplitData(X, Y)] == 0]
-		LabelonLeft = Y[X[:,SplitData(X, Y)] == 0]
-		Right = X[X[:,SplitData(X, Y)] == 1]
-		LabelonRight = Y[X[:,SplitData(X, Y)] == 1]
-		Left = np.delete(Left, SplitData(X, Y), 1)
-		Right = np.delete(Right, SplitData(X, Y), 1)
-		return [SplitData(X, Y),ChildTree(LabelonLeft, 0, Left, max_depth-1), ChildTree(LabelonRight, 0, Right, max_depth-1)]
+def CheckSides(Set,features, RootIndex, value1, value2):
+	Left = Set[features[:, RootIndex] == value1]
+	Right = Set[features[:, RootIndex] == value2]
+	return Left, Right
 
+def delete(Side, Side2, index, value):
+	Side  = np.delete(Side, index, value)
+	Side2 = np.delete(Side2, index, value)
+	return Side, Side2
+
+def DT_train_binary(X,Y,max_depth):
+	if (max_depth != 0) and ( X.size != 0):
+		index = SplitData(X, Y)
+		Left, Right = CheckSides(X,X,index, 0, 1)
+		LabelonLeft, LabelonRight = CheckSides(Y, X, index, 0, 1)
+		Left, Right = delete(Left, Right, index, 1)
+	
+		return [index,ChildTree(LabelonLeft, 0, Left, max_depth-1), ChildTree(LabelonRight, 0, Right, max_depth-1)]
+	else:
+		return 0 if Proportion(Y, 0) > Proportion(Y, 1) else 1
 
 def DT_test_binary(X,Y,DT):
 	Prediction = []
 	for sample in X:
 		DecisionTree = DT
-		if sample[DecisionTree[0]] == 0:
-			DecisionTree = DecisionTree[1]
-		else:
-			DecisionTree = DecisionTree[2]
+		while True:
+			if (len(DecisionTree) >= 3):
+				if sample[DecisionTree[0]] == 0:
+					DecisionTree = DecisionTree[1]
+				else:
+					DecisionTree = DecisionTree[2]
+			else:
+				break
 		Prediction.append(DecisionTree)
 	correct = 0
 	for i in range(len(Y)):
@@ -127,17 +139,18 @@ def LeftChild(DT):
 	return DT[1]
 
 def DT_make_prediction(x,DT):
-	if len(DT) < 3:
-		return DT
-	else:
-		if x[DT[0]!=0]:
-			DT = RightChild(DT)
-		else:
-			DT = LeftChild(DT)
-	return DT
+	DecisionTree = DT
+	while True:
+			if (len(DecisionTree) >= 3):
+				if x[DecisionTree[0]!=0]:
+					DecisionTree = RightChild(2)
+				else:
+					DecisionTree = LeftChild(1)
+			else: 
+				break
+	return DecisionTree
 
 def main():
-	#max_depth = -1
 	DT = DT_train_binary (X_Training2,Y_Training2, -1)
 	testacc = DT_test_binary(X_Training2,Y_Training2,DT)
 	print(testacc)
