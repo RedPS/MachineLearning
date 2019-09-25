@@ -1,5 +1,4 @@
 import numpy as np 
-import operator 
 import math 
 # BEGIN inputing first set of data 
 X_Training1 = np.array( [ [0,1], [0,0], [1,0], [0,0], [1,1] ] )
@@ -125,9 +124,8 @@ def DT_train_binary_best(X_train, Y_train, X_val, Y_val):
 	BestAccuracy = 0
 	CurrentAccuracy = -1
 	while BestAccuracy > CurrentAccuracy:
-		CurrentDepth = CurrentDepth + 1
 		CurrentDecisionTree = BestDecisionTree
-		BestDecisionTree = DT_train_binary(X_train,Y_train, CurrentDepth)
+		BestDecisionTree = DT_train_binary(X_train,Y_train, CurrentDepth + 1)
 		CurrentAccuracy = BestAccuracy
 		BestAccuracy = DT_test_binary(X_val,Y_val, BestDecisionTree)
 	return CurrentDecisionTree
@@ -143,9 +141,9 @@ def DT_make_prediction(x,DT):
 	while True:
 			if (len(DecisionTree) >= 3):
 				if x[DecisionTree[0]!=0]:
-					DecisionTree = RightChild(2)
+					DecisionTree = RightChild(DecisionTree)
 				else:
-					DecisionTree = LeftChild(1)
+					DecisionTree = LeftChild(DecisionTree)
 			else: 
 				break
 	return DecisionTree
