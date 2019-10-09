@@ -9,6 +9,7 @@ __pycache__
 *.rar
 *.tar
 *.zip
+*.pdf
 # Compiled source #
 ###################
 *.com
