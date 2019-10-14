@@ -1,5 +1,6 @@
 from nearest_neighbors import *
-#from perceptron import *
+from perceptron import *
+
 # Data for KNN
 X = np.array ([[1, 1], [2, 1], [0, 10], [10, 10], [5, 5], [3, 10], [9, 4], [6, 2], [2, 2], [8, 7]])
 Y = np.array( [[1], [-1], [1], [-1], [1], [-1], [1], [-1], [1], [-1]])
@@ -14,9 +15,19 @@ Perceptron_Y2 = np.array([[1], [1], [1], [-1], [-1], [-1]])
 
 
 def main():
+    print("-------------------- Part 1 ----------------------------\n")
     print("KNN_Test:", KNN_test(X,Y,XT, YT, 1))
     print("Chosen_K:", choose_K(X,Y,XT,YT))
-#    print("Perceptron_Train:",perceptron_train(X, Y)
-#    print("Perceptron_Test",perceptron_test(X, Y, W[0], W[1]))
+    print()
+
+    print("-------------------- Part 2 ----------------------------\n")
+    print()
+
+    print("-------------------- Part 3 ----------------------------\n")
+    print("Perceptron_Train:",perceptron_train(Perceptron_X2 , Perceptron_Y2))  # for test save these into w 
+    W = perceptron_train(Perceptron_X2 , Perceptron_Y2)
+    print("Perceptron_Test:",perceptron_test(Perceptron_X2, Perceptron_Y2, W[0], W[1]))
+    print()
+    
 if __name__ == "__main__":
     main()
