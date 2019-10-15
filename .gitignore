@@ -1,6 +1,8 @@
-# dont track these files 
+# dont track these files
 __pycache__
 SourceCodeLatex
+perc_test.py
+KNN_test.py
 # git has its own built in compression methods
 *.7z
 *.dmg
