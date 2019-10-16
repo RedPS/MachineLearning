@@ -2,6 +2,7 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 import random
+import time
 
 # Test
 # X = np.array([[1, 0], [7, 4], [9, 6], [2, 1], [4, 8], [0, 3], [13, 5], [6, 8], [7, 3], [3, 6], [2, 1], [8, 3], [10, 2], [3, 5], [5, 1], [1, 9], [10, 3], [4, 1], [6, 6], [2, 2]])
@@ -10,44 +11,65 @@ X = np.array([[0], [1], [2], [7], [8], [9], [12], [14], [15]])
 def K_Means(X, K):
 
     # Pre plot
-    plotClusters(X, "before")
+    PlotClusters(X, "before")
 
+    clusters = InitClusters(X, K)
+    
+    UpdateClusters(clusters)
+
+def UpdateClusters(clusters):
+
+    # cluster = np.asarray(clusters)
+
+    for clust in clusters[0]:
+        for items in clust:
+            print(items)
+            
+    # Choose the new center
+    print("Size 1:", len(clusters[0]))
+    print("Size 2:", len(clusters[1]))
+
+    
+
+    # Base case when clusters stop updating
+    # if (clusters == updatedClusters):
+    #     return clusters
+    # else:
+    #     UpdateClusters(updatedClusters)
+
+def EuclideanDistance(center, point):
+    distance = 0
+    for i in range(point.shape[0]):
+        val = (center[i] - point[i])**2
+        distance += val
+    
+    distance = math.sqrt(distance)
+    
+    return distance
+
+
+def InitClusters(X, K):
     # Initialize random cluster centers
     centerIndex = random.sample(range(len(X)), K)
     # Use the index to grab the center
     centers = []
-    for i in range(len(centerIndex)):
-        temp = centerIndex[i]
-        centers.append(X[temp])
-
-    # Now I have my centers, need to iterate the points and calculate the distance and place them in the appropriate cluster
-    # Item 1 == center 1, Item 2 == center 2...
-    clusters = init_clusters(X, centers)
-
-    # for items in clusters:
-    #     print(items)
-
-    FindClusters(clusters, K)
-
-def FindClusters():
-
-
-def InitClusters(X, centers):
-    # print(centers)
+    for items in centerIndex:
+        centers.append(X[items])
 
     cluster = [[] for i in range(len(centers))]
-
-    for i in range(len(X)):
-        dist = 1545651        
-        for j in range(len(centers)):
-            temp = math.sqrt((X[i] - centers[j])**2)
+    # cluster = np.asarray(cluster)
+    
+    for points in X:
+        dist = 1546548
+        for index, centerCoord in enumerate(centers):
+            temp = EuclideanDistance(points, centerCoord)
 
             if (temp <= dist):
                 dist = temp
-                val = X[i]
-                found = j
+                value = points
+                found = index
 
-        cluster[found].append(val)
+        cluster[found].append(value)
 
     return cluster
 
