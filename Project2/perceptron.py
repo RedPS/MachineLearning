@@ -3,7 +3,7 @@ import numpy as np
 def perceptron_train(X,Y):
     Done = False # converged or not 
     epoch = 0 #keep track of epoch in case the data is not linearly separable
-    maxEpoch = 30
+    maxEpoch = 199
     activation = 0 # initial activation
     W_B_List = [[],[]] # 0 is weight, 1 is bias 
     W_B_List[0] =[0]*len(X[0]) #initialize to 0
@@ -15,7 +15,7 @@ def perceptron_train(X,Y):
             for m in range(len(X[i])):
                 activation += X[i][m] * W_B_List[0][m]
             activation+= W_B_List[1][0]
-            if  (( activation * Y[i][0] ) < 1):
+            if  (( activation * Y[i][0] ) <= 0):
                 for j in range(len(X[0])):
                     W_B_List[0][j] = W_B_List[0][j] + Y[i][0] * X[i][j]
                 W_B_List[1][0] = W_B_List[1][0] + Y[i][0]
