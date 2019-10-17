@@ -1,3 +1,11 @@
+# 8: for k = 1 to K do
+# 9: Xk ← { xn : zn = k } // points assigned to cluster k
+# 10: µk ← mean(Xk
+# ) // re-estimate center of cluster k
+# 11: end for
+# 12: until µs stop changing
+# 13: return z // return cluster assignments
+
 import numpy as np
 import math
 import matplotlib.pyplot as plt
@@ -10,70 +18,61 @@ X = np.array([[0], [1], [2], [7], [8], [9], [12], [14], [15]])
 
 def K_Means(X, K):
 
-    # Pre plot
-    PlotClusters(X, "before")
-
-    clusters = InitClusters(X, K)
+    PrePlotClusters(X, "before")
     
-    UpdateClusters(clusters)
+    # Randomly initialize center
+    randCenterIndexes = random.sample(range(len(X)), K)
+    randCenters = []
+    for k in randCenterIndexes:
+        randCenters.append(X[k])
+    
+    FindClusters(X, randCenters)
 
-def UpdateClusters(clusters):
+def FindClusters(X, centers):
+    oldCenters = []
 
-    # cluster = np.asarray(clusters)
+    while oldCenters != centers:
+        print("going")
+        clusters = [[] for i in range(len(centers))]
+        for i in range(len(X)):
+            temp = 5444654
+            for centerIndex in range(len(centers)):
+                dist = calcDistance(X[i], centers[centerIndex])
 
-    for clust in clusters[0]:
-        for items in clust:
-            print(items)
+                if (dist <= temp):
+                    temp = dist
+                    value = X[i]
+                    found = centerIndex
             
-    # Choose the new center
-    print("Size 1:", len(clusters[0]))
-    print("Size 2:", len(clusters[1]))
+            clusters[found].append(value)
 
-    
+        # Update cluster center by the mean
+        oldCenters = centers.copy()
+        centers.clear()
+        
+        for i in range(len(oldCenters)):
+            number = np.mean(clusters[i])
+            centers.append(np.array([number]))
 
-    # Base case when clusters stop updating
-    # if (clusters == updatedClusters):
-    #     return clusters
-    # else:
-    #     UpdateClusters(updatedClusters)
+    for i in centers:
+        for j in i:
+            print("Center:", j)
+        
+    PlotClusters(clusters, "after")
 
-def EuclideanDistance(center, point):
+
+def calcDistance(point, centerPoint):
+
     distance = 0
     for i in range(point.shape[0]):
-        val = (center[i] - point[i])**2
-        distance += val
-    
+        value = (centerPoint[i] - point[i])**2
+        distance += value
+
     distance = math.sqrt(distance)
-    
+
     return distance
 
-
-def InitClusters(X, K):
-    # Initialize random cluster centers
-    centerIndex = random.sample(range(len(X)), K)
-    # Use the index to grab the center
-    centers = []
-    for items in centerIndex:
-        centers.append(X[items])
-
-    cluster = [[] for i in range(len(centers))]
-    # cluster = np.asarray(cluster)
-    
-    for points in X:
-        dist = 1546548
-        for index, centerCoord in enumerate(centers):
-            temp = EuclideanDistance(points, centerCoord)
-
-            if (temp <= dist):
-                dist = temp
-                value = points
-                found = index
-
-        cluster[found].append(value)
-
-    return cluster
-
-def PlotClusters(X, file):
+def PrePlotClusters(X, file):
     # Plot the points and see for a before
     x = []
     y = []
@@ -85,13 +84,32 @@ def PlotClusters(X, file):
             y.append(X[index][1])
         except:
             pass
-    
+
     try:
         plt.scatter(x, y)
     except:
         plt.scatter(x, np.zeros_like(x))
-    
+
     plt.savefig(file + ".jpg")     
+
+def PlotClusters(clusters, file):
+
+    x = []
+    colorString = 'red'
+
+    for i in range(len(clusters)):
+        for j in clusters[i]:
+            for items in j:
+                print(items)
+                x.append(items)
+            
+        plt.scatter(x, np.zeros_like(x), c=colorString)
+        x.clear()
+        colorString = 'blue'
+        print("----------")
+
+    
+    plt.savefig(file + ".jpg")
 
 
 K_Means(X, 2)
