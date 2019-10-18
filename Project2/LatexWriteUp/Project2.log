@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2019.9.6)  17 OCT 2019 23:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2019.9.6)  18 OCT 2019 14:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -598,45 +598,56 @@ File: lstlang1.sty 2019/02/27 1.8b listings language file
 <KNN.jpg, id=4, 1927.2pt x 1084.05pt>
 File: KNN.jpg Graphic file (type jpg)
 <use KNN.jpg>
-Package pdftex.def Info: KNN.jpg  used on input line 107.
+Package pdftex.def Info: KNN.jpg  used on input line 108.
 (pdftex.def)             Requested size: 462.53746pt x 260.1773pt.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 108.
+(Font)              <7> on input line 109.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 108.
+(Font)              <5> on input line 109.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 108.
+(Font)              <8> on input line 109.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 108.
+(Font)              <6> on input line 109.
  [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 ]
 <KNN2.jpg, id=15, 1927.2pt x 1084.05pt>
 File: KNN2.jpg Graphic file (type jpg)
 <use KNN2.jpg>
-Package pdftex.def Info: KNN2.jpg  used on input line 113.
+Package pdftex.def Info: KNN2.jpg  used on input line 114.
 (pdftex.def)             Requested size: 462.53746pt x 260.1773pt.
  [2 <./KNN.jpg> <./KNN2.jpg>] [3]
-(./Project2.aux) ) 
+<DB.png, id=25, 1445.4pt x 691.83469pt>
+File: DB.png Graphic file (type png)
+<use DB.png>
+Package pdftex.def Info: DB.png  used on input line 186.
+(pdftex.def)             Requested size: 346.90309pt x 166.04372pt.
+<DB2.png, id=27, 691.83469pt x 423.83344pt>
+File: DB2.png Graphic file (type png)
+<use DB2.png>
+Package pdftex.def Info: DB2.png  used on input line 191.
+(pdftex.def)             Requested size: 449.68721pt x 275.48845pt.
+ [4 <./DB.PNG>] [5 <./DB2.PNG>] (./Project2.aux) ) 
 Here is how much of TeX's memory you used:
- 24405 strings out of 492623
- 616595 string characters out of 6135670
+ 24428 strings out of 492623
+ 616810 string characters out of 6135670
  1048332 words of memory out of 5000000
- 27916 multiletter control sequences out of 15000+600000
+ 27936 multiletter control sequences out of 15000+600000
  7317 words of font info for 27 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 69i,11n,98p,705b,1283s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.
-pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
-7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/shar
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on Project2.pdf (3 pages, 329524 bytes).
+ 69i,11n,98p,1166b,1283s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmm
+i10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/s
+hare/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
+Output written on Project2.pdf (5 pages, 446275 bytes).
 PDF statistics:
- 51 PDF objects out of 1000 (max. 8388607)
- 35 compressed objects within 1 object stream
+ 66 PDF objects out of 1000 (max. 8388607)
+ 43 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 23 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 33 words of extra memory for PDF output out of 10000 (max. 10000000)
 

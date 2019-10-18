@@ -104,20 +104,92 @@
 	
 	Using the testing data given to us from the project description we will get the following results 
 \begin{center}
+The accuracy on K=1, K=2, K=3 are 0.3, 0.4, 0.6 respectively. You can see more details like which sample was predicted incorrectly on the picture below 
 \includegraphics[scale=.24]{KNN.jpg}
 	\footnote{The picture has a high resolution so you should be able to zoom in and see the detail, but the picure has also been included in the zip file so please refer to that if there is any issues}
 	
 \end{center}
-	The best K for our Algorithm would be 9 with the accuracy of 0.7
+	The best K for our Algorithm would be 9 with the accuracy of 0.7, for more details like which specific sample was predicted wrong refer to the picture below.
 	\begin{center}
 		\includegraphics[scale=.24]{KNN2.jpg}
 		\footnote{The picture has a high resolution so you should be able to zoom in and see the detail, but the picure has also been included in the zip file so please refer to that if there is any issues}
 		
 	\end{center}
-
+	\section{KMeans Clustering}
+	\subsection{Describe Implementation}
+	
+	\subsubsection{K\_Means}
+	\subsubsection{K\_Means\_better}
+	
+	\subsection{Algorithm Classification}
+	\subsubsection{KMeans on K = 2, K = 3}
+	\begin{center}
+		K = 2
+	\end{center}
+	\begin{center}
+		K = 3
+	\end{center}
+	
+	\subsubsection{KMeans Better on K = 2, K = 3}
+	\begin{center}
+		K = 2
+	\end{center}
+	\begin{center}
+		K = 3
+	\end{center}
+	
 	\section{Perceptron}
 	\subsection{Describe Implementation}
+	\subsubsection{perceptron\_train}
+	This function will be computing a weight (vector) and a bias using the data-set X and the labels for that set Y. We start with the initial weights and bias of 0 and we will kep track of epoch by a variable called epoch, we would also have to consider the fact that some data might not be linearly separable hence we will have another variable called maxEpoch which we would use to break our if the algorithm is not successful after maxEpoch tries. We will be using a while loop that checks if we are done yet, so we've gone an entire epoch without updating, or if we have reached the maxEpoch in which case the program gets out of the while loop and returns the weights and bias of the last iteration. Inside the while loop we are computing the activation and if the activation returns a number less than or equal to 0 we would ned to update hence we update our weight vector and the bias, they're both in the same list, the first element is weight vector, 2nd is bias(W\_B\_List) if data is linearly separable we would update our Done flag to true and get out of the loop and finally return the weight vector and bias (W\_B\_List)
+	\begin{lstlisting}[language=Python]
+	Done = False 
+	epoch = 0 
+	maxEpoch = 199
+	activation = 0 
+	W_B_List = [[],[]] 
+	W_B_List[0] =[0]*len(X[0]) 
+	W_B_List[1] = [0]
+	while ( not Done or epoch < maxEpoch): 
+		epoch+=1
+		for i in range (len(X)):
+			activation = 0
+			for m in range(len(X[i])):
+				activation += X[i][m] * W_B_List[0][m]
+			activation+= W_B_List[1][0]
+			if  (( activation * Y[i][0] ) <= 0):
+				for j in range(len(X[0])):
+					W_B_List[0][j] = W_B_List[0][j] + Y[i][0] * X[i][j]
+				W_B_List[1][0] = W_B_List[1][0] + Y[i][0]
+			else:
+				Done = True 
+	return W_B_List
+	\end{lstlisting}
+	
+	\subsubsection{perceptron\_test}
+	This function computes the accuracy of the weights and bias given the data-set X and their label Y. This function computes the activation for each of the samples in the data-set X and compares it with their label. If the activation matches the label we would increment our NumberOfCorrect variable at the end we will divide this number by the length of our data-set X to find the accuracy and we would return that number. 
+	\begin{lstlisting}[language=Python]
+	NumberOfCorrect = 0
+	activation = 0
+	for i, j in enumerate(X_test):
+		activation = np.dot(j,w) + b 
+		if activation * Y_test[i] > 0:
+			NumberOfCorrect+=1
+	return NumberOfCorrect/len(X_test)
+	\end{lstlisting}
+	 
 	\subsection{Decision Boundary}
+	I have used the Desmos website to plot the points and the decision boundary for this part. Blue points are the ones with label 1 and red points have label of -1. 
+	The algorithms returns 2,4 for our weights and 2 for our bias hence we will be  using the function 
+	$2X_1 + 4X_2 + 2 = 0$ we could simplify this function but since we will be drawing it to show the decision boundary there is no need.
+	\begin{center}
+		\includegraphics[scale=.24]{DB.png}
+		\footnote{The picture has a high resolution so you should be able to zoom in and see the detail, but the picure has also been included in the zip file so please refer to that if there is any issues}
+	\end{center}
+	\begin{center}
+	scaled larger for better visibility
+	\includegraphics[scale=.65]{DB2.png}
+\end{center}
 
 \end{document}
 
