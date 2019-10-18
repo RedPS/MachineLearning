@@ -113,3 +113,33 @@ def PlotClusters(clusters, file):
 
 
 K_Means(X, 2)
+
+
+
+
+# I was just thinking about K_Means_better and tried to write down what was in my mind, the below is not code it is just some initial thoughts 
+"""
+def K_Means_better(X, K):
+  centers = []
+  numberofcenters= []
+  SameCenters= []
+  alreadyseen = 0
+  tmp = 0
+
+    for  i in range(0, 9999999):
+        centers.append(listofKmeans)
+        if list(centers[i]) in list(samecenters):
+            alreadyseen = 0
+            while center[i] != samecenter
+                alreadyseen = alreadyseen + 1
+            numberofcenters[alreadyseen] = numberofcenters[alreadyseen] + 1
+        else:
+            samecenters.append(centers[i])
+            numberofcenters.append(1)
+    for i in range(0, len(numberofcenters))
+        if numberofcenters[tmp] < numberofcenters[i]
+            tmp = i
+    MostSeen = tmp
+
+    return np.array(SameCenters[MostSeen])
+"""
