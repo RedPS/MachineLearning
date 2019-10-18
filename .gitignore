@@ -2,6 +2,7 @@
 __pycache__
 SourceCodeLatex
 .vscode
+Project1
 # git has its own built in compression methods
 *.7z
 *.dmg
@@ -11,7 +12,7 @@ SourceCodeLatex
 *.rar
 *.tar
 *.zip
-*.pdf
+
 # Compiled source #
 ###################
 *.com
