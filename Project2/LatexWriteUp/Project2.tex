@@ -120,7 +120,29 @@ The accuracy on K=1, K=2, K=3 are 0.3, 0.4, 0.6 respectively. You can see more d
 	
 	\subsubsection{K\_Means}
 	\subsubsection{K\_Means\_better}
-	
+	This function takes X, our sample data-set and the K value and runs the K-Mean algorithm 1000 times (can be changed by the user) we will then count the number of occurrences of each cluster center and return the ones with the most repeated or occurred cluster centers, this value will be stored in a numpy array of cluster centers and then returned.
+	\begin{lstlisting}[language=Python]
+	def K_Means_better(X, K):
+	run = 1000
+	bestCenterList = []
+	occurences = []
+	j = 0
+	for i in range(run):
+		try:
+			result = K_Means(X, K)
+			bestCenterList.append(result)
+			j += 1
+	except:
+		pass
+	for j in range(len(bestCenterList)):
+		count = bestCenterList.count(bestCenterList[j])
+		occurences.append(count)
+	maxNum = 0
+	for k in occurences:
+		if (k > maxNum):
+			maxNum = k
+	return bestCenterList[maxNum]
+	\end{lstlisting}
 	\subsection{Algorithm Classification}
 	\subsubsection{KMeans on K = 2, K = 3}
 	\begin{center}
