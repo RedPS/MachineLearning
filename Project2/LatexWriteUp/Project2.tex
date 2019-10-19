@@ -123,6 +123,17 @@ The accuracy on K=1, K=2, K=3 are 0.3, 0.4, 0.6 respectively. You can see more d
 	  	The datapoints are passed into a function along with the centers and enter a while loop with the condition being it runs until error equals 0. Error is defined as the centers from one run not being the same centers generated from the next run. \newline \newline
 		A list of lists is generated depending on the number of centers passed in, e.g. if three centers were generated, K=3, so three clusters are necessary. Each point in the data is tested against the center points, calculating the Euclidean distance and putting the point in the corresponding cluster that had the least amount of distance to the center. \newline \newline
 	   	The new centers are then calculated using the mean of each individual cluster and tested against the old centers to see if the loop should be exited. If they are not the same these steps are repeated.
+	   		\begin{lstlisting}[language=Python]
+randCenterIndexes = random.sample(range(len(X)), K)
+randCenters = []
+for k in randCenterIndexes:
+randCenters.append(X[k])
+
+output = FindClusters(X, randCenters)
+
+return output
+	   	\end{lstlisting}
+	   	
 	\subsubsection{K\_Means\_better}
 	This function takes X, our sample data-set and the K value and runs the K-Mean algorithm 1000 times (can be changed by the user) we will then count the number of occurrences of each cluster center and return the ones with the most repeated or occurred cluster centers, this value will be stored in a numpy array of cluster centers and then returned.
 	\begin{lstlisting}[language=Python]
