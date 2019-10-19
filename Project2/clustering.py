@@ -2,11 +2,6 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 import random
-import time
-
-# Test
-# X = np.array([[1, 0], [7, 4], [9, 6], [2, 1], [4, 8], [0, 3], [13, 5], [6, 8], [7, 3], [3, 6], [2, 1], [8, 3], [10, 2], [3, 5], [5, 1], [1, 9], [10, 3], [4, 1], [6, 6], [2, 2]])
-X = np.array([[0], [1], [2], [7], [8], [9], [12], [14], [15]])
 
 def K_Means(X, K):
 
@@ -16,7 +11,9 @@ def K_Means(X, K):
     for k in randCenterIndexes:
         randCenters.append(X[k])
 
-    FindClusters(X, randCenters)
+    output = FindClusters(X, randCenters)
+
+    return output
 
 def FindClusters(X, centers):
     oldCenters = []
@@ -43,23 +40,32 @@ def FindClusters(X, centers):
         # print("O:", oldCenters)
         try:
             if (np.allclose([centers], [oldCenters])):
-                print("Clusters:", clusters)
-                print("Centers:", centers)
+                # print("Clusters:", clusters)
+                # print("Centers:", centers)
                 error = 0
         except:
             pass
         oldCenters = centers.copy()
 
+        # Jank but to dynamically make the dimensions, e.g: x -- x,y -- x,y,z etc.
+        # And to store the new centers again
         dimensions = [[] for i in range(clusters[0][0].shape[0])]
         centers = [[] for i in range(len(centers))]
+
+        # Iterate over the cluster and store the values in their respective array
+        # depending on the dimensions noted above
         for i in range(len(centers)):
             for j in clusters[i]:
                 for val in range(len(j)):
                     dimensions[val].append(j[val])
 
+            # Iterate over the dimension list and calculate the mean for that cluster
+            # To get the new cluster center
             for numDim in range(len(dimensions)):
                 value = np.mean(dimensions[numDim])
                 centers[i].append(value)
+
+    return centers
 
 
 def calcDistance(point, centerPoint):
@@ -71,9 +77,6 @@ def calcDistance(point, centerPoint):
     distance = math.sqrt(distance)
 
     return distance
-
-K_Means(X, 2)
-
 
 
 
