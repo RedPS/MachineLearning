@@ -67,7 +67,7 @@ def FindClusters(X, centers):
 
         dimensions.clear()
 
-    print(clusters)
+    # print(clusters)
     return centers
 
 
