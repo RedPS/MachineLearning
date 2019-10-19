@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2019.9.6)  18 OCT 2019 20:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2019.9.6)  18 OCT 2019 20:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -617,46 +617,51 @@ File: KNN2.jpg Graphic file (type jpg)
 Package pdftex.def Info: KNN2.jpg  used on input line 114.
 (pdftex.def)             Requested size: 462.53746pt x 260.1773pt.
  [2 <./KNN.jpg> <./KNN2.jpg>]
-<KMeans_K=2.png, id=22, 462.528pt x 346.896pt>
-File: KMeans_K=2.png Graphic file (type png)
-<use KMeans_K=2.png>
-Package pdftex.def Info: KMeans_K=2.png  used on input line 150.
+Underfull \hbox (badness 10000) in paragraph at lines 148--149
+
+ []
+
+<KMeans_K=2C.png, id=22, 462.528pt x 346.896pt>
+File: KMeans_K=2C.png Graphic file (type png)
+<use KMeans_K=2C.png>
+Package pdftex.def Info: KMeans_K=2C.png  used on input line 152.
 (pdftex.def)             Requested size: 370.02289pt x 277.51717pt.
- [3]
-<KMeans_K=3.png, id=27, 462.528pt x 346.896pt>
-File: KMeans_K=3.png Graphic file (type png)
-<use KMeans_K=3.png>
-Package pdftex.def Info: KMeans_K=3.png  used on input line 154.
+[3]
+<KMeans_K=3C.png, id=27, 462.528pt x 346.896pt>
+File: KMeans_K=3C.png Graphic file (type png)
+<use KMeans_K=3C.png>
+Package pdftex.def Info: KMeans_K=3C.png  used on input line 156.
 (pdftex.def)             Requested size: 370.02289pt x 277.51717pt.
- [4 <./KMeans_K=2.png> <./KMeans_K=3.png>] [5]
+ [4 <./KMeans_K=2C.png> <./KMeans_K=3C.png>] [5]
 <DB.png, id=36, 1445.4pt x 691.83469pt>
 File: DB.png Graphic file (type png)
 <use DB.png>
-Package pdftex.def Info: DB.png  used on input line 210.
+Package pdftex.def Info: DB.png  used on input line 212.
 (pdftex.def)             Requested size: 346.90309pt x 166.04372pt.
 <DB2.png, id=37, 691.83469pt x 423.83344pt>
 File: DB2.png Graphic file (type png)
 <use DB2.png>
-Package pdftex.def Info: DB2.png  used on input line 215.
+Package pdftex.def Info: DB2.png  used on input line 217.
 (pdftex.def)             Requested size: 449.68721pt x 275.48845pt.
- [6 <./DB.PNG> <./DB2.PNG>] (./Project2.aux) ) 
+ [6 <./DB.PNG> <./DB2.PNG>]
+(./Project2.aux) ) 
 Here is how much of TeX's memory you used:
  24447 strings out of 492623
- 617099 string characters out of 6135670
+ 617109 string characters out of 6135670
  1048332 words of memory out of 5000000
  27953 multiletter control sequences out of 15000+600000
  7317 words of font info for 27 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  69i,11n,98p,1166b,1283s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.
-pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texmf-dist/font
-s/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.
-pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on Project2.pdf (6 pages, 460950 bytes).
+</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.
+pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/sh
+are/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmtt8.pfb>
+Output written on Project2.pdf (6 pages, 461208 bytes).
 PDF statistics:
  73 PDF objects out of 1000 (max. 8388607)
  45 compressed objects within 1 object stream
