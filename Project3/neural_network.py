@@ -14,7 +14,7 @@ def calculate_loss(model, X, y):
         h = np.tanh(a)
         z_vector = h @ model["W2"] + model["b2"]
         y_hat = np.exp(z_vector - np.max(z_vector)) / (np.exp(z_vector - np.max(z_vector))).sum()
-        if (y[i] == 0):
+        if not y[i]:
             Loss += np.log(y_hat[0][0])
         else:
             Loss += np.log(y_hat[0][1])
