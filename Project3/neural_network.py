@@ -6,30 +6,31 @@ The algorithms in the book were straight forward but when implemented they seeme
 so I used this article http://web.stanford.edu/class/cs294a/sparseAutoencoder_2011new.pdf to implement 
 some of the functions using their approach
 """
+"""
+calculate a, h, z and return only z since we need z to calculate y_hat
+"""
+def calculate_helper_variables(model,X, h_flag = False):
+    a = np.dot(X, model["W1"]) + model["b1"]
+    h = np.tanh(a)
+    z = np.dot(h, model["W2"]) + model["b2"]
+    if h_flag:
+        return z,h
+    return z
 def calculate_loss(model, X, y):
     Loss = 0
-    radius = len(X)
+    radius = y.shape[0]
+    z = calculate_helper_variables(model,X)
+    y_hat = np.exp(z) / (np.sum(np.exp(z), axis=1)).reshape(-1, 1)
     for i in range(radius):
-        a = X[i].reshape(1, 2) @ model["W1"] + model["b1"]
-        h = np.tanh(a)
-        z_vector = h @ model["W2"] + model["b2"]
-        y_hat = np.exp(z_vector - np.max(z_vector)) / (np.exp(z_vector - np.max(z_vector))).sum()
-        if (y[i] == 0):
-            Loss += np.log(y_hat[0][0])
-        else:
-            Loss += np.log(y_hat[0][1])
-    return (Loss) * -(1/radius)
-
+        Loss = Loss + np.log(y_hat[i][y[i]])
+    return (-1/radius) * Loss
 def predict(model, x):
-    a = x @ model["W1"] + model["b1"]
-    h = np.tanh(a)
-    z_vector = h @ model["W2"] + model["b2"]
-    y_hat = np.exp(z_vector - np.max(z_vector)) / (np.exp(z_vector - np.max(z_vector))).sum()
     Prediction = []
-    for item in y_hat:
-        Prediction.append(np.argmax(item))
+    z = calculate_helper_variables(model,x)
+    y_hat = np.exp(z - np.max(z)) / (np.exp(z - np.max(z))).sum()
+    for i in y_hat:
+        Prediction.append(np.argmax(i))
     return np.array(Prediction)
-
 """
 One hot encoding: We are using this process so we can convert our categorical variables into a form that could be provided to the ML algorithms 
 so we can do a better job in prediction and make the algorithm possibly faster (in our case a lot) since we do not have to do that at each epoch and iteration
@@ -47,7 +48,6 @@ now with one hot encoding we get
   [1,0],
   [1,0],
   [0,1] ]
-
 The basic idea is that  we need a mechanism to somehow revert the output to the same format 
 as that of the input data. This is why we are using One-Hot Encoding
 """
@@ -58,41 +58,35 @@ def _one_hot_values(labels_data):
         max_value[i] = 1
         encoded[j] = max_value
     return np.array(encoded)
-
+def randomInitializer(y, nn_hdim):
+    W1 = np.random.rand(2, nn_hdim)
+    b1 = np.random.rand(1,nn_hdim)
+    W2 = np.random.rand(nn_hdim, y.max() + 1)
+    b2 = np.random.rand(y.max() + 1)
+    return W1,b1,W2,b2
 def build_model(X, y, nn_hdim, num_passes=20000, print_loss=True):
-    learningRate = 0.003
-    model = {
-        'W1': np.random.rand(2, nn_hdim),
-        'b1': np.random.rand(1,nn_hdim),
-
-        'W2': np.random.rand(nn_hdim, y.max() + 1),
-        'b2': np.random.rand(y.max() + 1)
-    }
+    eta = 0.003
+    W1,b1,W2,b2 = randomInitializer(y, nn_hdim)
+    model = {"W1" : W1, "W2": W2, "b1":b1, "b2":b2}
     ylabel = _one_hot_values(y)
+    if (print_loss):
+        print("New HiddenLayerSize")
     for index in range(1,num_passes):
-        a = X @ model["W1"] + model["b1"]
-        h = np.tanh(a)
-        z_vector = h @ model["W2"] + model["b2"]
-        y_hat = np.exp(z_vector) / (np.sum(np.exp(z_vector), axis=1)).reshape(-1, 1)
+        z,h = calculate_helper_variables(model,X,True)
+        y_hat = np.exp(z) / (np.sum(np.exp(z), axis=1, keepdims=True))
         dL_dyhat =  y_hat - ylabel
-        dLda = (1 - (pow(h,2))) * (dL_dyhat @ model["W2"].transpose())
-
+        dLda = (1 - (pow(h,2))) * (np.dot(dL_dyhat,model["W2"].transpose()))
         dLdb1 = np.sum(dLda)
-        dLdW1 = X.transpose() @ dLda
-
+        dLdW1 = np.dot(X.transpose(),dLda)
         dLdb2 = np.sum(dL_dyhat)
-        dLdW2 = h.transpose() @ dL_dyhat
-
-        model["b1"] = model["b1"] - learningRate * (dLdb1)
-        model["b2"] = model["b2"] - learningRate * (dLdb2)
-
-        model["W1"] = model["W1"] - learningRate * (dLdW1)
-        model["W2"] = model["W2"] - learningRate * (dLdW2)
-
+        dLdW2 = np.dot(h.transpose(),dL_dyhat)
+        model["b1"] = model["b1"] - eta * (dLdb1)
+        model["b2"] = model["b2"] - eta * (dLdb2)
+        model["W1"] = model["W1"] - eta * (dLdW1)
+        model["W2"] = model["W2"] - eta * (dLdW2)
         if (print_loss) and  not (index % 1000):
             print("iteration:", index, "Loss:", calculate_loss(model, X, y))
     return model
-
 """
 The below is just what was given to us in the project description
 """
