@@ -17,13 +17,13 @@ def calculate_helper_variables(model,X, h_flag = False):
         return z,h
     return z
 def calculate_loss(model, X, y):
-    Loss = 0
+    L = 0
     radius = y.shape[0]
     z = calculate_helper_variables(model,X)
     y_hat = np.exp(z) / (np.sum(np.exp(z), axis=1)).reshape(-1, 1)
     for i in range(radius):
-        Loss = Loss + np.log(y_hat[i][y[i]])
-    return (-1/radius) * Loss
+        L = L + np.log(y_hat[i][y[i]])
+    return ((-1/radius) * (L))
 def predict(model, x):
     Prediction = []
     z = calculate_helper_variables(model,x)
@@ -64,8 +64,20 @@ def randomInitializer(y, nn_hdim):
     W2 = np.random.rand(nn_hdim, y.max() + 1)
     b2 = np.random.rand(y.max() + 1)
     return W1,b1,W2,b2
-def build_model(X, y, nn_hdim, num_passes=20000, print_loss=True):
-    eta = 0.003
+def updateModel(model, dLdb1, dLdb2, dLdW1, dLdW2, eta=.01):
+    model["b1"] = model["b1"] - eta * (dLdb1)
+    model["b2"] = model["b2"] - eta * (dLdb2)
+    model["W1"] = model["W1"] - eta * (dLdW1)
+    model["W2"] = model["W2"] - eta * (dLdW2)
+def CalculateGradient(model , y_hat, ylabel, h ):
+    dL_dyhat =  y_hat - ylabel
+    dLda = (1 - (pow(h,2))) * (np.dot(dL_dyhat,model["W2"].transpose()))
+    dLdb1 = np.sum(dLda)
+    dLdW1 = np.dot(X.transpose(),dLda)
+    dLdb2 = np.sum(dL_dyhat)
+    dLdW2 = np.dot(h.transpose(),dL_dyhat)
+    return dLdb1,dLdW1,dLdb2,dLdW2
+def build_model(X, y, nn_hdim, num_passes=20000, print_loss=False):
     W1,b1,W2,b2 = randomInitializer(y, nn_hdim)
     model = {"W1" : W1, "W2": W2, "b1":b1, "b2":b2}
     ylabel = _one_hot_values(y)
@@ -74,16 +86,8 @@ def build_model(X, y, nn_hdim, num_passes=20000, print_loss=True):
     for index in range(1,num_passes):
         z,h = calculate_helper_variables(model,X,True)
         y_hat = np.exp(z) / (np.sum(np.exp(z), axis=1, keepdims=True))
-        dL_dyhat =  y_hat - ylabel
-        dLda = (1 - (pow(h,2))) * (np.dot(dL_dyhat,model["W2"].transpose()))
-        dLdb1 = np.sum(dLda)
-        dLdW1 = np.dot(X.transpose(),dLda)
-        dLdb2 = np.sum(dL_dyhat)
-        dLdW2 = np.dot(h.transpose(),dL_dyhat)
-        model["b1"] = model["b1"] - eta * (dLdb1)
-        model["b2"] = model["b2"] - eta * (dLdb2)
-        model["W1"] = model["W1"] - eta * (dLdW1)
-        model["W2"] = model["W2"] - eta * (dLdW2)
+        dLdb1,dLdW1,dLdb2,dLdW2 = CalculateGradient(model , y_hat, ylabel, h)
+        updateModel(model, dLdb1, dLdb2, dLdW1, dLdW2)
         if (print_loss) and  not (index % 1000):
             print("iteration:", index, "Loss:", calculate_loss(model, X, y))
     return model
