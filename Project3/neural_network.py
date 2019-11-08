@@ -61,10 +61,10 @@ def _one_hot_values(labels_data):
 def randomInitializer(y, nn_hdim):
     W1 = np.random.rand(2, nn_hdim)
     b1 = np.random.rand(1,nn_hdim)
-    W2 = np.random.rand(nn_hdim, y.max() + 1)
-    b2 = np.random.rand(y.max() + 1)
+    W2 = np.random.rand(nn_hdim, 2)
+    b2 = np.random.rand(1,2)
     return W1,b1,W2,b2
-def updateModel(model, dLdb1, dLdb2, dLdW1, dLdW2, eta=.01):
+def updateModel(model, dLdb1, dLdb2, dLdW1, dLdW2, eta=0.01):
     model["b1"] = model["b1"] - eta * (dLdb1)
     model["b2"] = model["b2"] - eta * (dLdb2)
     model["W1"] = model["W1"] - eta * (dLdW1)
@@ -122,3 +122,5 @@ for i, nn_hdim in enumerate(hidden_layer_dimensions):
     plot_decision_boundary(lambda x: predict(model, x), X, y)
 plt.show()
 """
+
+
