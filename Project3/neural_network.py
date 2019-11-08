@@ -94,6 +94,7 @@ def build_model(X, y, nn_hdim, num_passes=20000, print_loss=False):
 """
 The below is just what was given to us in the project description
 """
+"""
 def plot_decision_boundary(pred_func, X, y):
     # set min and max values and give it some padding
     x_min, x_max = X[:, 0].min() - .5, X[:, 0].max() + .5
@@ -120,3 +121,4 @@ for i, nn_hdim in enumerate(hidden_layer_dimensions):
     model = build_model(X, y, nn_hdim)
     plot_decision_boundary(lambda x: predict(model, x), X, y)
 plt.show()
+"""
