@@ -30,9 +30,8 @@ If v= 0, then k is used instead. We are Assuming they are never both 0 or both >
 """
 def project_data(Z,PCS,L,k,var):
     if var > 0:
-        k = np.max(np.argwhere(var >= (L.cumsum()/L.sum()))) + 1
-        PCS = PCS[:, :k]
-    return np.dot(Z, PCS)
+        k = (np.max(np.argwhere(var >= (L.cumsum()/L.sum()))))
+    return np.dot(Z, PCS[:, :k])
 """
 K = 0 was tricky, hopefully there was a function in numpy for calculating the cumalative since the assignment is not about 
 implemeting a cumalative function I just used the numpy one but here is the pseduo code 
