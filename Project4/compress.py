@@ -30,6 +30,12 @@ def compress_images(DATA,k):
     for i in range(0,len(DATA)):
         Z = pca.compute_Z(DATA[i])
         COV = pca.compute_covariance_matrix(Z)
-        PCS = pca.find_pcs(COV)
-        Zstar = pca.project_data(Z,PCS,k,k)
-        py.imsave('Output/out%i.png'%i,Zstar,vmin=0,vmax=255,cmap='gray',format='png')
+        L, PCS = pca.find_pcs(COV)
+        Zstar = pca.project_data(Z,PCS,L,k,0)
+        PCS = PCS[:, :k]
+        PCS = PCS.T
+        compress = np.dot(Zstar, PCS)
+        compress = compress.T
+        for j in range(0, len(compress)):
+            # save the images you have to reshape them ( something like compress[j].reshape(60,48) before or as you are saving the images )
+        # py.imsave('Output/out%i.png'%i,Zstar,vmin=0,vmax=255,cmap='gray',format='png')
