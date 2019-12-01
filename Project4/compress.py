@@ -31,7 +31,8 @@ def load_data(input_dir):
     for dir, child, datas in os.walk(input):
         for data in np.sort(datas):
             image = py.imread(input+ data, 'pgm')
-            dataimg.append(image.reshape(-1))
+            image = image.flatten()
+            dataimg.append(image)
     finalresult = np.array(dataimg)
     finalresult = finalresult.astype(np.float)
     finalresult = finalresult.transpose()
