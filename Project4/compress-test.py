@@ -3,6 +3,6 @@
 import compress as c
 
 
-data = c.load_data('./Project4/Data/ToCompare')
+data = c.load_data('Data/Train/')
 c.compress_images(data,100)
 
