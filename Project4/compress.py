@@ -6,21 +6,6 @@ import os
 import matplotlib.pyplot as py
 
 def load_data(input_dir):
-    # data = []
-    # exists = os.path.exists(input_dir)
-    # if not exists:
-    #     print("Can't find input dir")
-    #     return
-    # for pic in os.listdir(input_dir):
-    #     if input_dir[-1:] != '/':
-    #         imgOG = py.imread(input_dir+'/'+pic)
-    #     else:
-    #         imgOG = py.imread(input_dir+'/'+pic)
-    #     imgFlat = imgOG.flatten()
-    #     #unsure if want row major (above) or column major (below)
-    #     #imgFlat = imgOG.flatten(order='F')
-    #     data.append(imgFlat)
-    # return np.array(data)
     exists = os.path.exists(input_dir)
     if not exists:
         print("Can't find input dir")
