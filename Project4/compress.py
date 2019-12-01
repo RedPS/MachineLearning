@@ -6,21 +6,37 @@ import os
 import matplotlib.pyplot as py
 
 def load_data(input_dir):
-    data = []
+    # data = []
+    # exists = os.path.exists(input_dir)
+    # if not exists:
+    #     print("Can't find input dir")
+    #     return
+    # for pic in os.listdir(input_dir):
+    #     if input_dir[-1:] != '/':
+    #         imgOG = py.imread(input_dir+'/'+pic)
+    #     else:
+    #         imgOG = py.imread(input_dir+'/'+pic)
+    #     imgFlat = imgOG.flatten()
+    #     #unsure if want row major (above) or column major (below)
+    #     #imgFlat = imgOG.flatten(order='F')
+    #     data.append(imgFlat)
+    # return np.array(data)
     exists = os.path.exists(input_dir)
     if not exists:
         print("Can't find input dir")
-        return
-    for pic in os.listdir(input_dir):
-        if input_dir[-1:] != '/':
-            imgOG = py.imread(input_dir+'/'+pic)
-        else:
-            imgOG = py.imread(input_dir+'/'+pic)
-        imgFlat = imgOG.flatten()
-        #unsure if want row major (above) or column major (below)
-        #imgFlat = imgOG.flatten(order='F')
-        data.append(imgFlat)
-    return np.array(data)
+        return 
+    dataimg = []
+    finalresult = []
+    input = input_dir
+    for dir, child, datas in os.walk(input):
+        for data in np.sort(datas):
+            image = py.imread(input+ data, 'pgm')
+            dataimg.append(image.reshape(-1))
+    finalresult = np.array(dataimg)
+    finalresult = finalresult.astype(np.float)
+    finalresult = finalresult.transpose()
+    return finalresult
+
 
 def compress_images(DATA,k):
     exists = os.path.exists("Output")
@@ -36,5 +52,5 @@ def compress_images(DATA,k):
     compress = np.dot(Zstar, PCS)
     compress = compress.T
     for j in range(0, len(compress)):
-            # save the images you have to reshape them ( something like compress[j].reshape(60,48) before or as you are saving the images )
-        # py.imsave('Output/out%i.png'%i,Zstar,vmin=0,vmax=255,cmap='gray',format='png')
+        # save the images you have to reshape them ( something like compress[j].reshape(60,48) before or as you are saving the images )
+        py.imsave('Output/out%d.png'%j,compress[j].reshape(60,48),vmin=0,vmax=255,cmap='gray',format='png')
