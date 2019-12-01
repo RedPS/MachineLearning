@@ -27,15 +27,14 @@ def compress_images(DATA,k):
     if not exists:
         os.mkdir('Output')
     #for each pic in the data arr
-    for i in range(0,len(DATA)):
-        Z = pca.compute_Z(DATA[i])
-        COV = pca.compute_covariance_matrix(Z)
-        L, PCS = pca.find_pcs(COV)
-        Zstar = pca.project_data(Z,PCS,L,k,0)
-        PCS = PCS[:, :k]
-        PCS = PCS.T
-        compress = np.dot(Zstar, PCS)
-        compress = compress.T
-        for j in range(0, len(compress)):
+    Z = pca.compute_Z(DATA)
+    COV = pca.compute_covariance_matrix(Z)
+    L, PCS = pca.find_pcs(COV)
+    Zstar = pca.project_data(Z,PCS,L,k,0)
+    PCS = PCS[:, :k]
+    PCS = PCS.T
+    compress = np.dot(Zstar, PCS)
+    compress = compress.T
+    for j in range(0, len(compress)):
             # save the images you have to reshape them ( something like compress[j].reshape(60,48) before or as you are saving the images )
         # py.imsave('Output/out%i.png'%i,Zstar,vmin=0,vmax=255,cmap='gray',format='png')
