@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2019.11.18)  1 DEC 2019 17:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2019.11.18)  1 DEC 2019 18:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -652,28 +652,54 @@ your preamble.
 File: lstlang1.sty 2019/09/10 1.8c listings language file
 ) [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] (./main.aux) ) 
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
+<imgs/outk10.png, id=21, 34.6896pt x 43.362pt>
+File: imgs/outk10.png Graphic file (type png)
+<use imgs/outk10.png>
+Package pdftex.def Info: imgs/outk10.png  used on input line 158.
+(pdftex.def)             Requested size: 34.68951pt x 43.36188pt.
+<imgs/outk100.png, id=23, 34.6896pt x 43.362pt>
+File: imgs/outk100.png Graphic file (type png)
+<use imgs/outk100.png>
+Package pdftex.def Info: imgs/outk100.png  used on input line 160.
+(pdftex.def)             Requested size: 34.68951pt x 43.36188pt.
+<imgs/outk500.png, id=24, 34.6896pt x 43.362pt>
+File: imgs/outk500.png Graphic file (type png)
+<use imgs/outk500.png>
+Package pdftex.def Info: imgs/outk500.png  used on input line 162.
+(pdftex.def)             Requested size: 34.68951pt x 43.36188pt.
+<imgs/outk1000.png, id=25, 34.6896pt x 43.362pt>
+File: imgs/outk1000.png Graphic file (type png)
+<use imgs/outk1000.png>
+Package pdftex.def Info: imgs/outk1000.png  used on input line 164.
+(pdftex.def)             Requested size: 34.68951pt x 43.36188pt.
+<imgs/outk2000.png, id=26, 34.6896pt x 43.362pt>
+File: imgs/outk2000.png Graphic file (type png)
+<use imgs/outk2000.png>
+Package pdftex.def Info: imgs/outk2000.png  used on input line 166.
+(pdftex.def)             Requested size: 34.68951pt x 43.36188pt.
+ [3 <./imgs/outk10.png> <./imgs/outk100.png> <./imgs/outk500.png> <./imgs/outk1
+000.png> <./imgs/outk2000.png>] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 25291 strings out of 492167
- 627224 string characters out of 6131557
+ 25328 strings out of 492167
+ 627890 string characters out of 6131557
  1107594 words of memory out of 5000000
- 29238 multiletter control sequences out of 15000+600000
+ 29268 multiletter control sequences out of 15000+600000
  9359 words of font info for 35 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  76i,6n,102p,701b,1670s stack positions out of 5000i,500n,10000p,200000b,80000s
-</us
-r/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.p
-fb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmtt8.pfb>
-Output written on main.pdf (3 pages, 111462 bytes).
+</usr/share/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.
+pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmr5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cms
+y10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
+Output written on main.pdf (3 pages, 121783 bytes).
 PDF statistics:
- 53 PDF objects out of 1000 (max. 8388607)
- 38 compressed objects within 1 object stream
+ 64 PDF objects out of 1000 (max. 8388607)
+ 39 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 13 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 38 words of extra memory for PDF output out of 10000 (max. 10000000)
 
