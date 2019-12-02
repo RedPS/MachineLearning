@@ -81,7 +81,7 @@ def compute_covariance_matrix(Z):
 
 \section{find\_pcs}
 \subsection{Explanation}
-The below function will take the covariance matrix COV and return the ordered (largest to smallest) principal components PCS 
+The below function will take the covariance matrix COV and return the ordered (largest to smallest) principal components PCS
 PCS is a numpy array where each column is an eigenvector and corresponding eigenvalues L is also a numpy array
 We are using np.linalg.eig for this. We are also taking advantage of numpy.flip to reverse the order of elements in an array along the given axis. This function will require numpy V1.12.0 which the ECC does not have so please be aware!
 
@@ -93,10 +93,10 @@ def find_pcs(COV):
 
 \section{project\_data}
 \subsection{Explanation}
-The above function will take the standardized data matrix Z, the principal components PCS, and corresponding eigenvalues L, 
-as well as a k integer value and a var ﬂoating point value. k is the number of principal components you wish to maintain 
-when projecting the data into the new space. $0 \leq  k \leq  D$. If k= 0, then we use the cumulative variance to determine the projection dimension. 
-var is the desired cumulative variance explained by the projection. $0 \leq  v \geq  1$. 
+The above function will take the standardized data matrix Z, the principal components PCS, and corresponding eigenvalues L,
+as well as a k integer value and a var ﬂoating point value. k is the number of principal components you wish to maintain
+when projecting the data into the new space. $0 \leq  k \leq  D$. If k= 0, then we use the cumulative variance to determine the projection dimension.
+var is the desired cumulative variance explained by the projection. $0 \leq  v \geq  1$.
 If v= 0, then k is used instead. We are Assuming they are never both 0 or both $>$ 0. This function will return Z\_star, the projected data. Again we are using sum and cumsum here will will require numpy V1.17.0 which the ECC does not have.
 
 \begin{lstlisting}[language=Python]
@@ -109,7 +109,7 @@ def project_data(Z,PCS,L,k,var):
 
 \section{compress\_images}
 \subsection{Explanation}
-The \textbf{compress\_images} function takes in a \textbf{DATA} array and an int \textbf{k} the number of principal components to use. It uses PCA to get the principal components to compress the images that were given as input by doting the principal component with Z*. Then using reshape() the image is returned to it's original aspect ratio instead of being flattened. 
+The \textbf{compress\_images} function takes in a \textbf{DATA} array and an int \textbf{k} the number of principal components to use. It uses PCA to get the principal components to compress the images that were given as input by doting the principal component with Z*. Then using reshape() the image is returned to it's original aspect ratio instead of being flattened.
 \begin{lstlisting}[language=Python]
 def compress_images(DATA,k):
     exists = os.path.exists("Output")
@@ -137,7 +137,7 @@ def load_data(input_dir):
     exists = os.path.exists(input_dir)
     if not exists:
         print("Can't find input dir")
-        return 
+        return
     dataimg = []
     finalresult = []
     input = input_dir
@@ -152,14 +152,18 @@ def load_data(input_dir):
     return finalresult
 \end{lstlisting}
 
+
 \section{Compressed images from DATA/TRAIN}
 \subsection{10}
+\includegraphics{imgs/outk10.png}
 \subsection{100}
+\includegraphics{imgs/outk100.png}
 \subsection{500}
+\includegraphics{imgs/outk500.png}
 \subsection{1000}
+\includegraphics{imgs/outk1000.png}
 \subsection{2000}
-
-
+\includegraphics{imgs/outk2000.png}
 
 
 % \includegraphics[scale=.25]{plot.jpg}
