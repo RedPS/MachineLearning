@@ -6,7 +6,7 @@ basically what we are doing is subtracting the mean or the standard deviation (a
 def compute_Z(X,centering=True,scaling=False):
     # if centering is True subtract the mean from each feature in X
     # else (if scaling is true) subtract the standard deviation from each feature in X
-    return X - X.mean(axis=0) if centering else X/X.std(axis=0)
+    return X - np.mean(X,axis=0) if centering else X/np.std(X,axis=0)
 """
 The above function will take the standardized data matrix Z and return the covariance matrix ZTZ=COV (a numpy array).
 """
@@ -29,11 +29,12 @@ var is the desired cumulative variance explained by the projection. 0 ≤v≤ 1.
 If v= 0, then k is used instead. We are Assuming they are never both 0 or both > 0. This function will return Z_star, the projected data.
 """
 def project_data(Z,PCS,L,k,var):
-    if var > 0:
-        k = (np.max(np.argwhere(var >= (L.cumsum()/L.sum()))))
-    return np.dot(Z, PCS[:, :k])
+    new_k=k
+    if var != 0:
+        new_k = (np.max(np.argwhere((((np.cumsum(L))/(np.sum(L)))) <= var)))
+    return np.dot(Z, PCS[:,:new_k])
 """
-K = 0 was tricky, hopefully there was a function in numpy for calculating the cumalative since the assignment is not about 
+this was tricky, hopefully there was a function in numpy for calculating the cumalative since the assignment is not about 
 implemeting a cumalative function I just used the numpy one but here is the pseduo code 
   totaleigens = 0
   cumalative = 0
