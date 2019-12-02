@@ -9,7 +9,7 @@ def load_data(input_dir):
     exists = os.path.exists(input_dir)
     if not exists:
         print("Can't find input dir")
-        return 
+        return
     dataimg = []
     finalresult = []
     input = input_dir
