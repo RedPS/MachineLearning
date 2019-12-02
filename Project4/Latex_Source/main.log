@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2019.11.18)  1 DEC 2019 11:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2019.11.18)  1 DEC 2019 16:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -602,23 +602,24 @@ File: lstlang1.sty 2019/09/10 1.8c listings language file
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 24601 strings out of 492167
- 619568 string characters out of 6131557
- 970183 words of memory out of 5000000
- 28567 multiletter control sequences out of 15000+600000
- 7923 words of font info for 29 fonts, out of 8000000 for 9000
+ 24647 strings out of 492167
+ 620060 string characters out of 6131557
+ 1032249 words of memory out of 5000000
+ 28612 multiletter control sequences out of 15000+600000
+ 8231 words of font info for 30 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  76i,6n,102p,701b,1277s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/sh
-are/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmr17.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></us
-r/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on main.pdf (2 pages, 59484 bytes).
+are/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></
+usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
+Output written on main.pdf (2 pages, 88484 bytes).
 PDF statistics:
- 38 PDF objects out of 1000 (max. 8388607)
- 27 compressed objects within 1 object stream
+ 42 PDF objects out of 1000 (max. 8388607)
+ 30 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
